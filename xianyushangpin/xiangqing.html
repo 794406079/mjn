@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="xiangqing.css">
+    <link rel="stylesheet" href="font/iconfont.css">
+    <title>商品详情</title>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src='../cookie.js'></script>
+    <script>
+        $(function() {
+
+            var id = location.search.split('=')[1];
+            $.ajax({
+                type: "get",
+                url: "../PHP/getItem",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    var slider = $('.slider');
+                    var title = $('.title');
+                    var jiage = $('#jiage');
+                    var describe = $('.describe');
+                    var pic = JSON.parse(response.pic);
+                    a = `
+                    <div>
+                    <img src="${pic.a}" alt="" style="width:700px;height:360px">
+                    <img src="${pic.b}" alt=""  style="width:700px;height:360px">               
+                     </div>
+                    <span>&lt;</span>
+                    <span>&gt;</span>
+
+                    `;
+                    b = `
+                    ${response.title}
+
+                    `;
+                    c = `<b>¥</b>
+                    <em>${response.price}</em>
+                                `;
+                    d = `${response.details}`;
+                    title.append(b);
+                    jiage.append(c);
+                    describe.append(d);
+                    slider.append(a);
+                    $('.slider').slider();
+
+                    //购物车
+                    var jrgwc = $('#jrgwc');
+                    jrgwc.on('click', function() {;
+                        alert("添加成功")
+                        addgwc(response.id, response.price, 1)
+                    })
+                }
+            });
+
+
+            function addgwc(id, price, num) {
+                var shop = cookie.get('shop'); //从cookie获取shop
+                var product = {
+                    "id": id,
+                    "price": price,
+                    "num": num
+                };
+
+                if (shop) {
+                    shop = JSON.parse(shop); // cookie中如果有数据 这个数据是json字符串 转成对象
+
+                    if (shop.some(elm => elm.id == id)) {
+                        shop.forEach(function(elm, i) {
+                            elm.id == id ? elm.num = num : null;
+                        });
+                    } else {
+                        shop.push(product);
+                    }
+                    cookie.set('shop', JSON.stringify(shop), 1);
+                } else {
+                    shop = [];
+                    shop.push(product);
+                    cookie.set('shop', JSON.stringify(shop), 1);
+                }
+
+            }
+
+            if (cookie.get('isLogin')) {
+                var denglu = $('#denglu');
+                var denglu1 = $('#denglu1');
+                var zhuce = $('#zhuce');
+                var zhuce1 = $('#zhuce1');
+                denglu.html(cookie.get('username'));
+                denglu.setAttribute("href", "javascript:;");
+                zhuce.html('')
+
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="nav">
+            <ul class="l-nav">
+
+                <li><a href="../xianyudenglu/denglu.html" id="denglu">亲，请登录</a></li>
+                <li id="zhuce"><a href="../xianyuzhuce/zhuce.html">免费注册</a></li>
+                <li><a href="#">手机逛淘宝</a></li>
+            </ul>
+            <div class="r-nav">
+                <ul>
+                    <li><a href="#">我的淘宝</a>
+                        <span class="iconfont icon-xiangxia2"></span>
+                        <ul class="ejdh">
+                            <li><a href="#">已买到的宝贝</a></li>
+                            <li><a href="#">我的足迹</a></li>
+                        </ul>
+                    </li>
+                    <li><span class="iconfont icon-gouwuchefill
+         " style="margin-right:5px;color: orangered"></span><a href="../xianyugouwuche/gouwuche.html">购物车</a><span class="iconfont icon-xiangxia2"></span></li>
+                    <li><a href="#"><span class="iconfont icon-biaoxingfill
+         " style="margin-right:5px"></span>收藏夹</a><span class="iconfont icon-xiangxia2"></span>
+                        <ul class="ejdhsc">
+                            <li><a href="#">收藏的宝贝</a></li>
+                            <li><a href="#">收藏的店铺</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">商品分类</a></li>
+                    <li><a href="#">千牛卖家中心</a><span class="iconfont icon-xiangxia2"></span>
+                        <ul class="ejdhsc">
+                            <li><a href="#">免费开店</a></li>
+                            <li><a href="#">已卖出的宝贝</a></li>
+                            <li><a href="#">出售中的宝贝</a></li>
+                            <li><a href="#">卖家服务市场</a></li>
+                            <li><a href="#">卖家培训中心</a></li>
+                            <li><a href="#">体验中心</a></li>
+                            <li><a href="#">问商友</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">联系客服</a><span class="iconfont icon-xiangxia2"></span>
+                        <ul class="ejdhsc">
+                            <li><a href="#">消费者客服</a></li>
+                            <li><a href="#">卖家客服</a></li>
+                        </ul>
+                    </li>
+                    <li><span class="iconfont icon-caidan
+                    " style="margin-right:5px;color: orangered"></span><a href="#">网站导航</a>
+                        <span class="iconfont icon-xiangxia2"></span>
+                        <div class="wzdh">
+                            <div style="border-left:none">
+                                <h2 style="color:#fc4200;">主题市场</h2>
+                                <ul>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+
+
+                                </ul>
+                            </div>
+                            <div>
+                                <h2 style="color:#9fb838;">特色市场</h2>
+                                <ul>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<em></em></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<em></em></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<em></em></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h2 style="color:#d75696">阿里APP</h2>
+                                <ul>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<em></em></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<em></em></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<em></em></a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h2 style="color:#2e9fdb">精彩推荐集</h2>
+                                <ul>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装</a></li>
+                                    <li><a href="#">女装<i></i></a></li>
+                                    <li><a href="#">女装</a>
+                                        <li><a href="#">女装</a></li>
+                                        <li><a href="#">女装</a></li>
+                                        <li><a href="#">女装</a></li>
+                                        <li><a href="#">女装<i></i></a></li>
+                                        <li><a href="#"><em></em>女装</a></li>
+                                        <li><a href="#">女装</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </header>
+    <!-- main -->
+    <div class="idle-header-wrap">
+        <div class="idle-header" id="J_IdleHeader">
+            <h1 class="idle-logo">
+                <a href="#" target="_top">
+                    <img src="./TB1ys1sHVXXXXcrXVXXL_ZfHFXX-208-46.png" style="width:208px;height: 46px;" alt="闲鱼Logo">
+                </a>
+            </h1>
+            <div class="idle-nav">
+                <div class="idle-menu">
+                    <ul>
+                        <li class="m-home">
+                            <a href="../xianyuzhuye/zhuye.html">
+                                首页
+                            </a>
+                        </li>
+                        <li class="m-app">
+                            <a href="#">
+                                手机二手
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">二手车估价
+                            </a>
+                        </li>
+                        <li class="m-auction">
+                            <a href="#">
+                                降降降
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="idle-manage">
+                    <span class="idle-manage-sp">|</span>
+                    <ul>
+                        <li>
+                            <a class="pub-overlay-btn">
+                                发布闲置
+                            </a>
+                        </li>
+                        <li id="J_IdleLi" class="my-idle-li">
+                            <a class="my-idle-link" id="J_IdleLink" href="#">
+                                我的闲置
+                                <i class="iconfont icon-down"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sub">
+        <div class="col-main">
+            <div class="main-wrap">
+                <div class="property">
+                    <h1 class="title">
+                        <!--Apple/苹果笔记本apple pro 13.3-->
+                    </h1>
+                    <ul class="price-info">
+                        <li class="price-block">
+                            <span class="para">
+                                转&nbsp;&nbsp;卖&nbsp;&nbsp;价：
+                            </span>
+                            <span class="price big" id="jiage">
+                                <!-- <b>¥</b>
+                                <em>3400.00</em> -->
+                            </span>
+                            <span class="bargain-tip">
+                                <i class="i-tip"></i>该商品拒绝讲价！
+                            </span>
+                        </li>
+                        <li class="price-block">
+                            <!-- <span class="para">原　　价：</span>
+                            <b>¥</b>
+                            <span>13000.00</span> -->
+                        </li>
+                    </ul>
+                    <div class="buy-now">
+                        <a class="ljgm-btn" href="javascript:;">
+                            <span id="jrgwc">加入购物车</span>
+                        </a>
+                        <br>
+                        <br>
+
+                        <a class="ljgm-btn" href="#">
+                            <span>立即购买</span>
+                        </a>
+                    </div>
+                    <div class="guarantee_new">
+                        <div class="dbjy">
+                            <span class="tit"></span>
+                            <strong class="desc">由支付宝先行保管,验货OK再付款到卖家账户。</strong>
+                        </div>
+                        <div class="smrz">
+                            <span class="tit" style="background-position: 0 -20px;"></span>
+                            <strong class="desc">经支付宝核实会员身份和银行账户信息,真实可靠。</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider">
+                <!-- <div>
+                    <img src="./aj.jpg" alt="">
+                    <img src="./aj1.jpg" alt="">
+                    <img src="./aj2.jpg" alt="">
+                </div>
+                <span>&lt;</span>
+                <span>&gt;</span> -->
+            </div>
+            <div style="width: 750px;">
+                <div class="list-tabs">
+                    <ul>
+                        <li class="J_TabTrigger tabnavfirst actived ">
+                            <a href="#desc-intro">宝贝介绍</a>
+                        </li>
+                        <li class="J_TabTrigger">
+                            <a href="#message" name="messages">留言</a>
+                        </li>
+                        <li class="J_TabTrigger ">
+                            <a href="#guarantee">安全保障</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="security-tip">
+                    如遇到以下情况可能是诈骗行为：
+                    <span class="h">1.宝贝价格异常低；</span>
+                    <span class="h">2.卖家要求QQ沟通；</span>
+                    <span class="h">3.卖家要求直接汇款。</span>
+                    <a href="#" target="_blank">寻求防骗经验。</a>
+                </div>
+                <div class="J_Panel desc-mod desc-intro">
+                    <h2>
+                        <b>宝贝介绍</b>
+                    </h2>
+                    <div class="describe">
+                        <!-- 一直爱护的很好、女孩子自用苹果笔记本电脑MacBookPro笔记本手提电脑，从英国留学背回来的。双系统，平时就是用来制制图，看看电视, 配置为 双核处理器4G运行内存，大容量高速硬盘，13.3高清屏 。最后一张图有配置图，自己看。 无暗病 Wi-Fi 蓝牙 光驱 摄像头都支持 原装充电器 从没维修过。 -->
+                    </div>
+                    <div class="xy-guide">
+                        <div class="xy-left">
+                            <div class="xy-intro"></div>
+                            <div class="xy-guide-btn J_xianyu">下载闲鱼客户端</div>
+                        </div>
+                        <div class="xy-right"></div>
+                    </div>
+                </div>
+                <div class="desc-mod ">
+                    <h2><b>安全保障</b></h2>
+                    <h3 class="title">二手交易消费者安全保障服务</h3>
+                    <ul>
+                        <li class="first">
+                            <b class="icon"></b>
+                            <div class="intro">
+                                <h4>卖家实名认证</h4>
+                                <p>淘宝二手卖家必备网络身份证；<br>经支付宝核实会员身份信息和银行账户信息。</p>
+                            </div>
+                            <b class="arrow"></b>
+                            <div class="addon">真实.可靠.网络身份证</div>
+                        </li>
+                        <li class="second">
+                            <b class="icon"></b>
+                            <div class="intro">
+                                <h4>专业团队支撑</h4>
+                                <p>发现可疑卖家或商品，发起举报，由安全部门专员介入处理交易出现纠纷，双方协商不成，由专业的客服小二介入仲裁。</p>
+                            </div>
+                            <b class="arrow"></b>
+                            <div class="addon">专业.精英.全方位支持</div>
+                        </li>
+                        <li class="third">
+                            <b class="icon"></b>
+                            <div class="intro">
+                                <h4>支付宝担保交易</h4>
+                                <p>支付款项由支付宝先行保管，验货OK后，再确认付款到卖家账户，买家发起交易，杜绝钓鱼网站。</p>
+                            </div>
+                            <b class="arrow"></b>
+                            <div class="addon">收货.验货.满意再付款</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="idle-footer" id="J_IdleFooter">
+        <div class="idle-footer-info">
+            <div class="idle-footer-links">
+                <div class="idle-footer-links-box">
+                    <a href="#nogo" target="_self" class="idle-footer-link-auth">卖家实名认证</a>
+                    <a href="#nogo" target="_self" class="idle-footer-link-alipay">支付宝担保交易</a>
+                    <a href="#nogo" target="_self" class="idle-footer-link-team">专业团队支撑</a>
+                    <a href="#" class="idle-footer-link-weibo">官方微博</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-idle-new footer-with-logo">
+        <div class="tb-footer-hd ">
+            <p>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        阿里巴巴集团
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        淘宝网
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        天猫
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="#" rel="noopener noreferrer ">
+                        聚划算
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        全球速卖通
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        阿里巴巴国际交易市场
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        1688
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        阿里妈妈
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="#" rel="noopener noreferrer ">
+                        飞猪
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        阿里云计算
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        AliOS
+                    </a>
+                </span>
+                <b>|</b>
+                <span>
+                    <a href="# " rel="noopener noreferrer ">
+                        阿里通信
+                    </a>
+                </span><b>|</b><span><a href="# " rel="noopener noreferrer ">一淘</a></span><b>|</b><span><a href="#" rel="noopener noreferrer ">万网</a></span><b>|</b><span><a href="#" rel="noopener noreferrer ">高德</a></span><b>|</b><span><a href="#/ " rel="noopener noreferrer ">UC</a></span><b>|</b><span><a href="# " rel="noopener noreferrer ">友盟</a></span><br><span><a href="#" rel="noopener noreferrer ">虾米</a></span><b>|</b><span><a href="#" rel="noopener noreferrer ">大麦网</a></span><b>|</b><span><a href="# " rel="noopener noreferrer
+                        ">钉钉</a></span><b>|</b><span><a href="#" rel="noopener noreferrer ">支付宝</a></span><b>|</b><span><a href="#" rel="noopener noreferrer ">优酷</a></span><b>|</b><span><a href="#" rel="noopener noreferrer
+                        ">土豆</a></span><b>|</b><span><a href="# " rel="noopener noreferrer ">阿里健康</a></span><b>|</b><span><a href="# " rel="noopener noreferrer ">阿里影业</a></span><b>|</b><span><a href="#" rel="noopener noreferrer ">阿里体育</a></span><b>|</b><span><a href="# " rel="noopener noreferrer ">网商银行</a></span></p>
+        </div>
+        <div class="footer-bd">
+            <p>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.23">
+                      关于淘宝
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.24">
+                      合作伙伴
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.25">
+                      营销中心
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.26">
+                      廉正举报
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.27">
+                      联系客服
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.28">
+                      开放平台
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.29">
+                      诚征英才
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.30">
+                      联系我们
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.31">
+                      网站地图
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.32">
+                      法律声明及隐私权政策
+                    </a>
+                  </span>
+                <span>
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.33">
+                      知识产权
+                    </a>
+                  </span>
+                <b>
+                    |
+                  </b>
+                <em>
+                    2003-2016 Taobao.com 版权所有
+                  </em>
+            </p>
+            <p>
+                <span>
+                    网络文化经营许可证：
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.34">
+                      浙网文[2013]0268-027号
+                    </a>
+                  </span>
+                <b>
+                    |
+                  </b>
+                <span>
+                    增值电信业务经营许可证：
+                    <a href="#" data-spm-anchor-id="a21bo.50862.1997523009.35">
+                      浙B2-20080224
+                    </a>
+                  </span>
+                <b>
+                    |
+                  </b>
+                <span>
+                    信息网络传播视听节目许可证：1109364号
+                  </span>
+                <b>
+                    |
+                  </b>
+                <span>
+                    互联网违法和不良信息举报电话:0571-81683755 blxx@list.alibaba-inc.com
+                  </span>
+            </p>
+        </div>
+        <div class="footer-ft">
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: 0px 0px;width:36px;background-image:url(wj.gif);" data-spm-anchor-id="a21bo.50862.1997523009.36">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: 0px 0px;width:30px;" data-spm-anchor-id="a21bo.50862.1997523009.37">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -40px 0px;width:33px;" data-spm-anchor-id="a21bo.50862.1997523009.38">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -80px 0px;width:50px;" data-spm-anchor-id="a21bo.50862.1997523009.39">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -140px 0px;width:83px;" data-spm-anchor-id="a21bo.50862.1997523009.40">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -240px 0px;width:94px;" data-spm-anchor-id="a21bo.50862.1997523009.41">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -431px 0px;width:214px;" data-spm-anchor-id="a21bo.50862.1997523009.42">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -650px 0px;width:105px;" data-spm-anchor-id="a21bo.50862.1997523009.43">
+                  </a>
+                </span>
+            <span>
+                  <a target="_blank" href="#" class="mod" style="background-position: -345px 0px;width:82px;" data-spm-anchor-id="a21bo.50862.1997523009.44">
+                  </a>
+                </span>
+        </div>
+    </div>
+</body>
+
+</html>
