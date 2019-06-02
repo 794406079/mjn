@@ -30,8 +30,9 @@
                     var pic = JSON.parse(response.pic);
                     a = `
                     <div>
-                    <img src="${pic.a}" alt="" style="width:700px;height:360px">
-                    <img src="${pic.b}" alt=""  style="width:700px;height:360px">               
+
+                    <img src="../${pic.a}" alt="" style="width:700px;height:360px">
+                    <img src="../${pic.b}" alt=""  style="width:700px;height:360px">  
                      </div>
                     <span>&lt;</span>
                     <span>&gt;</span>
@@ -43,6 +44,9 @@
                     `;
                     c = `<b>¥</b>
                     <em>${response.price}</em>
+                    <div class="num">库存${response.num}</div>
+                   
+                    数量：<input type="number" value="1" min="1" max="${response.num}" id="num">
                                 `;
                     d = `${response.details}`;
                     title.append(b);
@@ -55,11 +59,10 @@
                     var jrgwc = $('#jrgwc');
                     jrgwc.on('click', function() {;
                         alert("添加成功")
-                        addgwc(response.id, response.price, 1)
+                        addgwc(response.id, response.price, $('#num').val())
                     })
                 }
             });
-
 
             function addgwc(id, price, num) {
                 var shop = cookie.get('shop'); //从cookie获取shop
@@ -72,8 +75,14 @@
                 if (shop) {
                     shop = JSON.parse(shop); // cookie中如果有数据 这个数据是json字符串 转成对象
 
+                    // function (elm){
+                    //      return elm.id==id
+                    // }
+
+
                     if (shop.some(elm => elm.id == id)) {
                         shop.forEach(function(elm, i) {
+
                             elm.id == id ? elm.num = num : null;
                         });
                     } else {
@@ -85,16 +94,12 @@
                     shop.push(product);
                     cookie.set('shop', JSON.stringify(shop), 1);
                 }
-
             }
-
             if (cookie.get('isLogin')) {
                 var denglu = $('#denglu');
-                var denglu1 = $('#denglu1');
                 var zhuce = $('#zhuce');
-                var zhuce1 = $('#zhuce1');
                 denglu.html(cookie.get('username'));
-                denglu.setAttribute("href", "javascript:;");
+                denglu.attr("href", "javascript:;");
                 zhuce.html('')
 
             }
@@ -356,7 +361,7 @@
                         <br>
                         <br>
 
-                        <a class="ljgm-btn" href="#">
+                        <a class="ljgm-btn" href="../xianyugouwuche/gouwuche.html">
                             <span>立即购买</span>
                         </a>
                     </div>

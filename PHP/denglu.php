@@ -16,5 +16,8 @@ if($result->num_rows>0){
 }else{
     echo "<script>alert('登陆失败');location.href='../xianyudenglu/denglu.html';</script>";
 }
-
+$mysqli->close()
 ?>
+
+
+

@@ -47,7 +47,7 @@
                     if (elems._index <= 1) {
                         var divLeft = that.offset().left,
                             imgLeft = elems.sliderDiv.children('img').last().offset().left;
-                        elems._index = 4;
+                        elems._index = 3;
                         elems.sliderDiv.css('left', '-' + (imgLeft - divLeft) + 'px');
 
                     }
@@ -59,7 +59,7 @@
                     if (fx) elems._index++;
                     else elems._index--;
 
-                    if (elems._index === 4) {
+                    if (elems._index === 3) {
                         elems._index = 1;
                         elems.sliderDiv.css('left', 0);
                     }

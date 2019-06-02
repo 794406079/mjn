@@ -25,7 +25,7 @@
 
                         abc = `
                         <a href="../xianyushangpin/xiangqing.html?id=${elm.id}" class="huaduo">
-            <div class="item-img"><img src="${pic.a}" alt=""></div>
+            <div class="item-img"><img src="../${pic.a}" alt=""></div>
             <div class="item-info">
                 <p class="item-title">${elm.title}</p>
                 <div class="price-line">
@@ -40,8 +40,7 @@
                     <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
-                        
-                        
+                                               
                         `
                         splx.append(abc)
                     })
@@ -58,7 +57,6 @@
                 var zhuce = document.querySelector('#zhuce');
                 var zhuce1 = document.querySelector('#zhuce1');
                 var touxiang = document.querySelector('#touxiang');
-                // console.log(cookie.get('username'))
                 denglu.innerHTML = cookie.get('username');
                 denglu1.innerHTML = cookie.get('username');
                 denglu.setAttribute("href", "javascript:;");
@@ -92,7 +90,7 @@
                         </ul>
                     </li>
                     <li><span class="iconfont icon-gouwuchefill
-     " style="margin-right:5px;color: orangered"></span><a href="#">购物车</a><span class="iconfont icon-xiangxia2"></span></li>
+     " style="margin-right:5px;color: orangered"></span><a href="../xianyugouwuche/gouwuche.html">购物车</a><span class="iconfont icon-xiangxia2"></span></li>
                     <li><a href="#"><span class="iconfont icon-biaoxingfill
      " style="margin-right:5px"></span>收藏夹</a><span class="iconfont icon-xiangxia2"></span>
                         <ul class="ejdhsc">
