@@ -81,7 +81,6 @@ header {
   width: 84px;
   padding: 0 6px;
 }
-/* 二级 */
 .l-nav > li:nth-child(1):hover,
 .r-nav > ul > li:nth-child(1):hover,
 .r-nav > ul > li:nth-child(3):hover,
@@ -214,7 +213,7 @@ li:hover .wzdh {
   width: 9px;
   height: 14px;
   overflow: hidden;
-  background: url(T1hOy5XhNnXXXXXXXX-9-14.gif) no-repeat;
+  background: url(../imgs/T1hOy5XhNnXXXXXXXX-9-14.gif) no-repeat;
 }
 .wzdh > div ul li a em {
   display: block;
@@ -224,7 +223,7 @@ li:hover .wzdh {
   width: 9px;
   height: 14px;
   overflow: hidden;
-  background: url(T1lni5XhXXXXXXXXXX-9-14.gif) no-repeat;
+  background: url(../imgs/T1lni5XhXXXXXXXXXX-9-14.gif) no-repeat;
 }
 .wzdh > div:nth-child(1) ul li:hover a {
   background: #fc4200;
@@ -591,5 +590,5 @@ li:hover .wzdh {
   display: inline-block;
   background-repeat: no-repeat;
   vertical-align: middle;
-  background-image: url(TB1EPnIQXXXXXaSXpXXXXXXXXXX-1133-35.jpg);
+  background-image: url(../imgs/TB1EPnIQXXXXXaSXpXXXXXXXXXX-1133-35.jpg);
 }

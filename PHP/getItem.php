@@ -7,9 +7,10 @@
 
     $res = $mysqli->query($sql);
 
-    $row = $res->fetch_assoc();
+    $row = $res->fetch_assoc();//遍历
+    
 
-    $json = json_encode($row);
+    $json = json_encode($row);//转字符串
 
     echo $json;
 

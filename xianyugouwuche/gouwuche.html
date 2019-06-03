@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="font/iconfont.css">
+    <link rel="stylesheet" href="../xianyuzhuye/font/iconfont.css">
     <link rel="stylesheet" href="gouwuche.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src='../cookie.js'></script>
@@ -22,6 +22,7 @@
             if (shop) {
                 shop = JSON.parse(shop);
                 var idList = shop.map(elm => elm.id).join();
+                // console.log(idList)
                 $.ajax({
                     type: "get",
                     url: "../PHP/gouwuche.php",
@@ -41,7 +42,7 @@
 
                             template = `<div class="cart-main-a">
                 <div class="cart-show-box">
-                    <input type="checkbox" class="${elm.price}" checked="checked" >
+                    <input type="checkbox" class="${elm.id}"  >
                     <div class="img-box">
                         <img src="../${pic.a}" alt="" style="width:80px;height:80px">
                     </div>
@@ -51,13 +52,13 @@
                     <div class="item-icon-list clearfix">
                         <div class="item-icons J_ItemIcons  item-icons-fixed ">
                             <span class="item-icon item-icon-0" title="支持信用卡支付">
-                                <img src="./T1BCidFrNlXXaSQP_X-16-16.png" alt="">
+                                <img src="../imgs/T1BCidFrNlXXaSQP_X-16-16.png" alt="">
                             </span>
                             <a href="#" class="item-icon item-icon-1 J_MakePoint" title="消费者保障服务，卖家承诺7天退换">
-                                <img src="./T1Vyl6FCBlXXaSQP_X-16-16.png" alt="">
+                                <img src="../imgs/T1Vyl6FCBlXXaSQP_X-16-16.png" alt="">
                             </a>
                             <a href="#" class="item-icon item-icon-2 J_MakePoint" title="消费者保障服务，卖家承诺如实描述">
-                                <img src="./xcard.png" alt="">
+                                <img src="../imgs/xcard.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -89,7 +90,7 @@
 
                             //删除
                             $('#' + elm.id).on('click', function() {
-                                console.log(elm.id);
+                                // console.log(elm.id);
                                 var a = elm.id;
                                 var b = JSON.parse(cookie.get('shop')).filter(function(elm, i) {
                                         return elm.id != a
@@ -99,25 +100,34 @@
                                     // console.log(c)
                                 cookie.set("shop", c, 1)
                                 $(this)[0].parentNode.parentNode.remove();
-
-
                             });
+                            //算价格
+
+                            $("." + elm.id).on('change', function() {
+                                var zongjia = $('#zongjia').html().split(':')[1] - 0
+                                if ($("." + elm.id).prop("checked")) {
+                                    zongjia = zongjia + arr[0].num * elm.price;
+                                } else {
+                                    zongjia = zongjia - arr[0].num * elm.price;
+                                }
+                                return $('#zongjia').html('总价:' + zongjia)
+                            })
 
                         });
+
+                        $('#gmcg').on('click', function() {
+                            var a = $('#zongjia').html().split(':')[1] - 0
+                            alert('购买成功，总价:' + a)
+                        })
+
                     }
                 });
             }
-            //总价
-            arr = []
-            JSON.parse(cookie.get('shop')).forEach(function(elm, i) {
-                arr.push(elm.num * elm.price)
-            })
-            var jiage = (arr.reduce(function(a, b) {
-                return a + b
-            }))
+            //点击购买
 
-            $('#zongjia').html("总价:" + jiage)
-
+            // $('#gmcg').on('click', function() {
+            //         alert('购买成功')
+            //     })
             //用户名问题
             if (cookie.get('isLogin')) {
                 var denglu = $('#denglu');
@@ -304,7 +314,7 @@
             <div id="J_Header" class="header tb-header">
                 <h1 id="logo" class="cart-logo">
                     <a href="#" title="淘宝网" style="position: absolute;">
-                        <img src="./TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" style="width: 120px;">
+                        <img src="../imgs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" style="width: 120px;">
                     </a>
                 </h1>
                 <h2 class="tsl">购物车</h2>
@@ -365,51 +375,14 @@
 
 
         <div class="cart-main">
-            <!-- <div class="cart-main-a">
-                <div class="cart-show-box">
-                    <input type="radio">
-                    <div class="img-box">
-                        <img src="./O1CN01XiLIYw25meLEkw8uk_!!21037569.jpg_80x80.jpg" alt="">
-                    </div>
-                    <div class="item-basic-info">
-                        <a href="#" title="" class="item-title J_GoldReport J_MakePoint">MSI/微星RTX2060笔记本电脑冲锋坦克GL63轻薄便携学生9代6GB独显15.6英寸电竞屏手提电脑吃鸡GTX1660Ti游戏本</a>
-                    </div>
-                    <div class="item-icon-list clearfix">
-                        <div class="item-icons J_ItemIcons  item-icons-fixed ">
-                            <span class="item-icon item-icon-0" title="支持信用卡支付">
-                                <img src="./T1BCidFrNlXXaSQP_X-16-16.png" alt="">
-                            </span>
-                            <a href="#" class="item-icon item-icon-1 J_MakePoint" title="消费者保障服务，卖家承诺7天退换">
-                                <img src="./T1Vyl6FCBlXXaSQP_X-16-16.png" alt="">
-                            </a>
-                            <a href="#" class="item-icon item-icon-2 J_MakePoint" title="消费者保障服务，卖家承诺如实描述">
-                                <img src="./xcard.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item-props item-props-can">
-                        <p class="sku-line">套餐类型：官方标配</p>
-                        <p class="sku-line">颜色分类：i7-8750H RTX2060</p>
-                    </div>
-                    <div class="td-inner">
-                        <em tabindex="0" class="J_ItemSum number">
-                            ￥82990.00
-                        </em>
-                    </div>
-                    <div class="td-inner-all">
-                        <em tabindex="0" class="J_ItemSum number">
-                                共计：82990.00 元
-                            </em>
-                    </div>
-                </div>
-            </div> -->
+
         </div>
-        <span style="position: relative;left: 600px;color: #666666;font-size: 2em" id="zongjia">总价：0</span>
-        <button style="height: 50px;width:300px;position: relative;left: 690px;background-color: #f40;font-size: 1.3em;color:#fff;border: none">立即购买</button>
+        <span style="position: relative;left: 600px;color: #666666;font-size: 2em" id="zongjia">总价:0</span>
+        <button style="height: 50px;width:300px;position: relative;left: 690px;background-color: #f40;font-size: 1.3em;color:#fff;border: none" id="gmcg">立即购买</button>
     </div>
 
 
-    <!-- 底部二 -->
+    <!-- 底部 -->
     <div id=" J_SiteFooter " style="min-height: 150px ">
         <div class="tb_footer ">
             <div class="tb-footer-hd ">
@@ -491,7 +464,7 @@
             </div>
             <div class="tb-footer-bd ">
                 <p>
-                    <span><a href="# " rel="noopener noreferrer ">关于淘宝</a></span><span><a href="# " rel="noopener noreferrer ">合作伙伴</a></span><span><a href="# " rel="noopener noreferrer ">营销中心</a></span><span><a href="# " rel="noopener noreferrer
+                    <span><a href="../xianyuguanyu/guanyu.html" rel="noopener noreferrer ">关于淘宝</a></span><span><a href="# " rel="noopener noreferrer ">合作伙伴</a></span><span><a href="# " rel="noopener noreferrer ">营销中心</a></span><span><a href="# " rel="noopener noreferrer
             ">廉正举报</a></span><span><a href="# " rel="noopener noreferrer ">联系客服</a></span><span><a href="# " rel="noopener noreferrer ">开放平台</a></span><span><a href="# " rel="noopener noreferrer ">诚征英才</a></span><span><a href="# " rel="noopener noreferrer
             ">联系我们</a></span><span><a href="# " rel="noopener noreferrer ">网站地图</a></span><span><a href="# " rel="noopener noreferrer ">隐私权政策</a></span><span><a href="# " rel="noopener noreferrer ">法律声明</a></span><span><a href="# " rel="noopener noreferrer ">知识产权</a></span>
                     <b>|</b> <em>© 2003-现在 Taobao.com 版权所有</em>

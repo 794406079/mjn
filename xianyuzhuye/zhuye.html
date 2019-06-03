@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="taobao.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src='../cookie.js'></script>
+    <script src="../tuupola-jquery_lazyload/jquery.lazyload.min.js"></script>
     <script>
         $(function() {
             $.ajax({
@@ -25,7 +26,7 @@
 
                         abc = `
                         <a href="../xianyushangpin/xiangqing.html?id=${elm.id}" class="huaduo">
-            <div class="item-img"><img src="../${pic.a}" alt=""></div>
+            <div class="item-img"><img data-original="../${pic.a}" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">${elm.title}</p>
                 <div class="price-line">
@@ -36,15 +37,19 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
                                                
                         `
                         splx.append(abc)
                     })
+                    $("img").lazyload({
+                        effect: "fadeIn"
+                    });
                 }
+
             });
         })
     </script>
@@ -61,14 +66,21 @@
                 denglu1.innerHTML = cookie.get('username');
                 denglu.setAttribute("href", "javascript:;");
                 denglu1.setAttribute("href", "javascript:;");
-                touxiang.setAttribute("src", "cgx.jpg");
+                touxiang.setAttribute("src", "../imgs/cgx.jpg");
                 touxiang.style.borderRadius = "50%"
                 zhuce.innerHTML = "";
                 zhuce1.innerHTML = "";
             }
         }
     </script>
-
+    <!-- //懒加载 -->
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            $("img").lazyload({
+                effect: "fadeIn"
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -243,7 +255,7 @@
     <div class="main">
         <div class="bgt">
             <div class="main-top">
-                <div><img src="TB1.D7SnkPoK1RjSZKbXXX1IXXa-124-60.png" alt=""></div>
+                <div><img src="../imgs/TB1.D7SnkPoK1RjSZKbXXX1IXXa-124-60.png" alt=""></div>
 
                 <div class="tab-wrap">
                     <div class="tab">
@@ -253,7 +265,7 @@
                     <div class="wdxz-hz">
                         <div class="wdxz">
                             <span>我的闲置</span>
-                            <img src="TB1bI4vnOLaK1RjSZFxXXamPFXa-24-24.png" alt="">
+                            <img src="../imgs/TB1bI4vnOLaK1RjSZFxXXamPFXa-24-24.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -261,7 +273,7 @@
         </div>
         <!-- 注册登录 -->
         <div class="usercard-wrap">
-            <div class="unlogin"><img src="TB1AApbnxnaK1RjSZFBXXcW7VXa-140-140.png" class="icon" id="touxiang">
+            <div class="unlogin"><img src="../imgs/TB1AApbnxnaK1RjSZFBXXcW7VXa-140-140.png" class="icon" id="touxiang">
                 <a href="../xianyudenglu/denglu.html" class="btn" id="denglu1">请登录</a>
                 <a href="../xianyuzhuce/zhuce.html" class="tip" id="zhuce1">免费注册</a>
             </div>
@@ -269,14 +281,14 @@
     </div>
     <!-- 淘宝一键转卖 -->
     <div class="slodbar-wrap">
-        <div class="slodbar-item"><img src="TB1SkxunMDqK1RjSZSyXXaxEVXa-112-112.png" class="icon">
+        <div class="slodbar-item"><img src="../imgs/TB1SkxunMDqK1RjSZSyXXaxEVXa-112-112.png" class="icon">
             <div class="desc">
                 <p class="name">淘宝一键转卖</p>
                 <p class="cont">淘宝买过的宝贝能换钱；他们都在用闲鱼，1个月平均多赚1600+</p>
             </div>
         </div>
         <div class="line"></div>
-        <div class="slodbar-item"><img src="TB1g54xnMHqK1RjSZFPXXcwapXa-112-112.png" class="icon">
+        <div class="slodbar-item"><img src="../imgs/TB1g54xnMHqK1RjSZFPXXcwapXa-112-112.png" class="icon">
             <div class="desc">
                 <p class="name">发布闲置</p>
                 <p class="cont">闲置换钱 快速出手</p>
@@ -337,8 +349,9 @@
     <!-- 商品类型 -->
     <div class="splx">
         <div class="splx1"></div>
+
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -349,12 +362,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -365,12 +378,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -381,12 +394,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -397,12 +410,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -413,12 +426,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -429,12 +442,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -445,12 +458,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -461,12 +474,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -477,12 +490,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -493,12 +506,12 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
@@ -509,25 +522,220 @@
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
         <a href="#" class="huaduo">
-            <div class="item-img"><img src="O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt=""></div>
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
             <div class="item-info">
                 <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
                 <div class="price-line">
 
                     <p class="price-unit">￥</p>
                     <p class="price-value">16.80</p>
+
                 </div>
             </div>
             <div class="user-line">
-                <div class="user-info"><img src="T11FtVFwhXXXb1upjX.jpg" class="usericon">
-                    <p class="user-name">l***m</p> <img src="TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
             </div>
         </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+        <a href="#" class="huaduo">
+            <div class="item-img"><img data-original="../imgs/O1CN01bKywYS1kK9lfDwuM5_!!0-fleamarket.gif" alt="" class="lazy"></div>
+            <div class="item-info">
+                <p class="item-title">玉露-多肉植物肉肉植物 自家种的三年生玉露，特别好养！放置在有阳光的地方，每周通风一次（打开窗户十几分钟即可），10～1</p>
+                <div class="price-line">
+
+                    <p class="price-unit">￥</p>
+                    <p class="price-value">16.80</p>
+
+                </div>
+            </div>
+            <div class="user-line">
+                <div class="user-info"><img src="../imgs/T11FtVFwhXXXb1upjX.jpg" class="usericon">
+                    <p class="user-name">l***m</p> <img src="../imgs/TB1HCq9GN1YBuNjy1zcXXbNcXXa-168-24.png" class="user-tag"></div>
+            </div>
+        </a>
+
+
     </div>
     <div class="hjgsz-div">
         <ul class="hjgsz">
@@ -546,17 +754,17 @@
     <!-- 来闲鱼 置换能换钱 -->
     <div class="bottom-wrap">
         <div class="bottom-main">
-            <img src="TB1ON87HVXXXXcVXpXXieo_0pXX-288-177.png" class="bottom-logo">
-            <img src="TB1naO0IFXXXXXsXFXXIU.iNXXX-332-76.png" class="bottom-desc">
+            <img src="../imgs/TB1ON87HVXXXXcVXpXXieo_0pXX-288-177.png" class="bottom-logo">
+            <img src="../imgs/TB1naO0IFXXXXXsXFXXIU.iNXXX-332-76.png" class="bottom-desc">
             <div class="bottom-download">
                 <div class="download-w" style="margin-right: 5px;">
                     <a href="#" target="_blank" style="display: block;">
-                        <img src="TB1VO4WHVXXXXcKXFXXfBBiHXXX-200-62.png" class="bottom-download-ios" style="margin-bottom: 5px;">
+                        <img src="../imgs/TB1VO4WHVXXXXcKXFXXfBBiHXXX-200-62.png" class="bottom-download-ios" style="margin-bottom: 5px;">
                     </a>
-                    <img src="TB1aOKTHVXXXXXdXpXXfBBiHXXX-200-62.png" class="bottom-download-and">
+                    <img src="../imgs/TB1aOKTHVXXXXXdXpXXfBBiHXXX-200-62.png" class="bottom-download-and">
                 </div>
                 <div class="bottom-download-code">
-                    <img src="TB1SK8Ow3HqK1RjSZJnXXbNLpXa-260-260.png" class="bottom-download-code1">
+                    <img src="../imgs/TB1SK8Ow3HqK1RjSZJnXXbNLpXa-260-260.png" class="bottom-download-code1">
                 </div>
             </div>
         </div>
@@ -564,8 +772,8 @@
     <!-- 卖家实名认证 -->
 
     <div class="rz-wrap">
-        <div class="rz-main"><img src="TB1COuknQvoK1RjSZPfXXXPKFXa-264-60.png"> <img src="TB1Zj1enMDqK1RjSZSyXXaxEVXa-294-60.png"> <img src="TB1j3V.nSrqK1RjSZK9XXXyypXa-272-60.png">
-            <a href="#" target="_blank"><img src="TB1H49mnNTpK1RjSZFMXXbG_VXa-356-60.png" style="cursor: pointer;"></a>
+        <div class="rz-main"><img src="../imgs/TB1COuknQvoK1RjSZPfXXXPKFXa-264-60.png"> <img src="../imgs/TB1Zj1enMDqK1RjSZSyXXaxEVXa-294-60.png"> <img src="../imgs/TB1j3V.nSrqK1RjSZK9XXXyypXa-272-60.png">
+            <a href="#" target="_blank"><img src="../imgs/TB1H49mnNTpK1RjSZFMXXbG_VXa-356-60.png" style="cursor: pointer;"></a>
         </div>
     </div>
 
@@ -650,7 +858,7 @@
             </div>
             <div class="tb-footer-bd">
                 <p>
-                    <span><a href="#" >关于淘宝</a></span><span><a href="#" >合作伙伴</a></span><span><a href="#" >营销中心</a></span><span><a href="#" >廉正举报</a></span><span><a href="#" >联系客服</a></span><span><a href="#" >开放平台</a></span><span><a href="#" >诚征英才</a></span><span><a href="#" >联系我们</a></span><span><a href="#" >网站地图</a></span><span><a href="#" >隐私权政策</a></span><span><a href="#" >法律声明</a></span><span><a href="#" >知识产权</a></span>
+                    <span><a href="../xianyuguanyu/guanyu.html" >关于淘宝</a></span><span><a href="#" >合作伙伴</a></span><span><a href="#" >营销中心</a></span><span><a href="#" >廉正举报</a></span><span><a href="#" >联系客服</a></span><span><a href="#" >开放平台</a></span><span><a href="#" >诚征英才</a></span><span><a href="#" >联系我们</a></span><span><a href="#" >网站地图</a></span><span><a href="#" >隐私权政策</a></span><span><a href="#" >法律声明</a></span><span><a href="#" >知识产权</a></span>
                     <b>|</b> <em>? 2003-现在 Taobao.com 版权所有</em>
                 </p>
                 <p><span><a href="#" >增值电信业务经营许可证：浙B2-20080224</a></span><b>|</b><span><a href="#" >增值电信业务经营许可证（跨地区）： B2-20150210</a></span><b>|</b><span><a href="#" >网络文化经营许可证：浙网文[2016]0268-027号</a></span><b>|</b><span>浙江省网络食品销售第三方平台提供者备案：浙网食A33010001</span></p>
