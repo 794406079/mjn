@@ -5,7 +5,7 @@
   "main": "cookie.js",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "save": "^2.4.0"
   },
   "devDependencies": {
